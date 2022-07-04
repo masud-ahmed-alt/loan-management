@@ -80,9 +80,10 @@
             $('#login').click(function () {
                 var username = $('#username').val();
                 var password = $('#password').val();
+                password = password.trim()
 
                 if (username == '' || password == '') {
-                    $("#msg").append("<b>Field can't be empty</b>");
+                    $("#msg").html("<b>Field can't be empty</b>");
                 } else {
                     $.post("backend/login.php",
                         {
@@ -90,11 +91,12 @@
                             password: password
                         },
                         function (data, status) {
+
                             console.log(data);
                             if (data == 100) {
                                 window.location.href = ("index.php");
                             } else {
-                                $("#msg").append("<b>Incorrect Credentials!</b>");
+                                $("#msg").html("<b>Incorrect Credentials!</b>");
                             }
                         }
                     )

@@ -203,9 +203,7 @@
                     voter: voter,
                     password: password
                 }, function(data, status) {
-                    console.log(data);
-                    $("#para").append(data);
-                    // window.location.href = "agent.php";
+                    $("#para").html(data);
                 })
             }
         })

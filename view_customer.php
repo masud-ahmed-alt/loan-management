@@ -218,27 +218,27 @@ if (isset($_POST['btnView'])) {
 
                 var act = value.activity;
                 if (act == 0)
-                    $('#btnstatus').append('<span class="badge badge-secondary">Pending</span>');
+                    $('#btnstatus').html('<span class="badge badge-secondary">Pending</span>');
                 else if (act == 1)
-                    $('#btnstatus').append('<span class="badge badge-success">Active</span>');
+                    $('#btnstatus').html('<span class="badge badge-success">Active</span>');
                 else
-                    $('#btnstatus').append('<span class="badge badge-danger">Closed</span>');
+                    $('#btnstatus').html('<span class="badge badge-danger">Closed</span>');
 
-                $('#loanac').append(value.loan_ac_no);
-                $('#loanAmt').append("₹" + financial(value.loan_amount));
-                $('#irate').append(value.interest_rate + "%");
-                $('#iamt').append("₹" + financial(value.interest_amount));
-                $('#month').append(value.no_of_month);
-                $('#emi').append(value.no_emi);
-                $('#tamt').append("₹" + financial(value.total_amount));
-                $('#emiamt').append("₹" + financial(value.emi_amount));
+                $('#loanac').html(value.loan_ac_no);
+                $('#loanAmt').html("₹" + financial(value.loan_amount));
+                $('#irate').html(value.interest_rate + "%");
+                $('#iamt').html("₹" + financial(value.interest_amount));
+                $('#month').html(value.no_of_month);
+                $('#emi').html(value.no_emi);
+                $('#tamt').html("₹" + financial(value.total_amount));
+                $('#emiamt').html("₹" + financial(value.emi_amount));
                 if (value.emi_schedule == 1)
-                    $('#emiSch').append('Monthly');
+                    $('#emiSch').html('Monthly');
                 else
-                    $('#emiSch').append('Weekly');
-                $('#emileft').append(value.no_emi_left);
-                $('#startdate').append(getDate(value.start_date));
-                $('#enddate').append(getDate(value.end_date));
+                    $('#emiSch').html('Weekly');
+                $('#emileft').html(value.no_emi_left);
+                $('#startdate').html(getDate(value.start_date));
+                $('#enddate').html(getDate(value.end_date));
             }
         });
 

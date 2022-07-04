@@ -47,13 +47,10 @@
             success: function(data, status) {
                 var value = [];
                 value = $.parseJSON(data);
-                var sl = 0
-                var i =0
-                for (i = 0; i < value.length; i++) {
-                    ++sl;
+                for (var i = 0; i < value.length; i++) {
                     var tableOut =
                         `<tr>
-                                    <td >${sl}</td>
+                                    <td >${""}</td>
                                     <td>${value[i][7]}</td>
                                     <td>${value[i][1]}</td>
                                     <td>${value[i][8]}</td>
@@ -63,17 +60,27 @@
                                     <td><img src="images/profile.jpg" alt="Error" style="width: 60px;"></td>
                                     <td>
                                     <div class="btn-group">
-                                        <input type="hidden" class="" id="eid_${value[i]}" name="edit_fine" value="${value[i].eid}">
-                                        <button id="deleteEmp_${value[i]}" class="btn btn-sm btn-danger">Delete</button>
+                                        <button id="" onclick="deleteEmp(${(value[i].eid)})"  class="btn btn-sm btn-danger">Delete</button>
                                     </div>
                                     </td>
                                 </tr>`;
-
                     $("#tblbody").append(tableOut);
                 }
             }
         });
+
     });
+
+    function deleteEmp(id) {
+        var delEmp = 'delEmp';
+        $.post('backend/actions.php', {
+            delEmp,
+            id
+        }, function(data, status) {
+            alert('Deleted!');
+            window.location.href='employee.php'
+        })
+    }
 
 
     // if (value[0].user_roll == 'master_admin')

@@ -214,17 +214,15 @@
 
 
             if (fine_name == '' || percentage == '' || fine_desc == '') {
-                $("#para").append("<b>All fields are compulsory!</b>");
+                $("#para").html("<b>All fields are compulsory!</b>");
             } else {
                 $.post("backend/fine_master_model.php", {
                     fine_name,
                     percentage,
                     fine_desc
                 }, function(data, status) {
-                    console.log(data);
                     alert(data);
                     window.location.href = "setloanfine.php";
-                    // window.location.href = "agent.php";
                 })
             }
         });

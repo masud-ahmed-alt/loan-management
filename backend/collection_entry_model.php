@@ -25,7 +25,6 @@ if($sql->execute()){
     $data = $getEmi->fetch();
     $emi = $data['no_emi_left'];
     $emi = $emi-1;
-    // echo json_encode($emi);
 
     $sqlUpLoan = "UPDATE `loan_ac` SET `no_emi_left`='$emi' WHERE loan_id='$loan_id'";
     $sqlUpdate = $conn->prepare($sqlUpLoan);

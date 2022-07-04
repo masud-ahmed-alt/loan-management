@@ -15,5 +15,14 @@ function getSql($con, $query)
     }
 }
 
-
+// function for update data 
+function updateData($con,$query)
+{
+    $update = $con->prepare($query);
+    if ($update->execute()) {
+        echo 'Updated successfully';
+    } else {
+        echo 'Something went wrong!';
+    }
+}
 

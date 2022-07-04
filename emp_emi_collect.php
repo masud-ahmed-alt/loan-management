@@ -143,18 +143,18 @@
             </div>`;
 
                     if (values == false) {
-                        $('#maindiv').append('<h1 class="text-danger text-center">No Result Found!</h1>');
+                        $('#maindiv').html('<h1 class="text-danger text-center">No Result Found!</h1>');
                     } else {
-                        $('#maindiv').append(output);
+                        $('#maindiv').html(output);
 
                         // get fine details 
                         var fine = 'fine';
                         $.post('backend/getfinemaster_model.php', {
                             fine: fine
                         }, function(data, status) {
-                            var obj = jQuery.parseJSON(data);
-                            var count = Object.keys(obj).length;
-                            for (var i = 0; i < count; i++) {
+                            var obj = $.parseJSON(data);
+                            
+                            for (var i = 0; i < obj.length; i++) {
                                 var fineOut = `<option value="${obj[i].fine_percent}">${obj[i].fine_percent+" % - " +obj[i].fine_name}</option>`
                                 $('#finepercent').append(fineOut);
                             }
@@ -165,7 +165,6 @@
                             loan_id
                         }, function(data, status) {
                             var trans = jQuery.parseJSON(data);
-                            console.log(trans);
                             for (var i = 0; i < 3; i++) {
                                 var date = new Date(trans[i].collection_date);
                                 var d = ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) +
@@ -211,7 +210,7 @@
                                     tamt,
                                     cus_id
                                 }, function(data, status) {
-                                    // console.log(data);
+                                    console.log(data);
                                     alert(data);
                                     window.location.href = 'emp_emi_collect.php';
                                 });

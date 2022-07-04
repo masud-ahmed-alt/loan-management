@@ -101,35 +101,40 @@
                 var phone = $('#phone').val();
                 var email = $('#email').val();
                 var password = $('#password').val();
+                password = password.trim()
+
 
                 if (username == '') {
-                    $("#msg").append("<b>Username can't be empty!</b>");
+                    $("#msg").html("<b>Username can't be empty!</b>");
                 } else if (fullname == '') {
-                    $("#msg").append("<b>Name can't be empty!</b>");
+                    $("#msg").html("<b>Name can't be empty!</b>");
                 } else if (adds == '') {
-                    $("#msg").append("<b>Address can't be empty!</b>");
+                    $("#msg").html("<b>Address can't be empty!</b>");
                 } else if (phone == '') {
-                    $("#msg").append("<b>Phone can't be empty!</b>");
-                } else if (email = '') {
-                    $("#msg").append("<b>Email can't be empty!</b>");
-                } else if (password = '') {
-                    $("#msg").append("<b>Password can't be empty!</b>");
+                    $("#msg").html("<b>Phone can't be empty!</b>");
+                } else if (email == '') {
+                    $("#msg").html("<b>Email can't be empty!</b>");
+                } else if (password == '') {
+                    $("#msg").html("<b>Password can't be empty!</b>");
                 } else {
                     $.post("backend/register_model.php",
                         {
                             username: username,
-                            fullname:fullname,
-                            adds:adds,
-                            phone:phone,
-                            email:email,
+                            fullname: fullname,
+                            adds: adds,
+                            phone: phone,
+                            email: email,
                             password: password
                         },
                         function (data, status) {
-                            if(data==100){
+                            if (data == 100) {
                                 alert('Registration Success');
-                                window.location.href='login.html';
-                            }else
-                            alert(data)
+                                window.location.href = 'login.html';
+                            } else {
+                                alert(data)
+
+                            }
+
                         }
                     )
                 }

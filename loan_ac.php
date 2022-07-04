@@ -262,7 +262,7 @@
                     },
                     function(data, status) {
                         alert(data);
-                        // console.log(status);
+                        window.location.href='loan_ac.php'
                     });
             }
         });
