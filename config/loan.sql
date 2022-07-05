@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 28, 2022 at 06:03 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.1
+-- Generation Time: Jul 05, 2022 at 09:59 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -61,7 +61,9 @@ CREATE TABLE `authenticate_user` (
 --
 
 INSERT INTO `authenticate_user` (`au_id`, `username`, `password`, `user_roll`, `session_id`) VALUES
-(13, 'masud', '21232f297a57a5a743894a0e4a801fc3', 'master_admin', '00000');
+(13, 'masud', '21232f297a57a5a743894a0e4a801fc3', 'master_admin', '00000'),
+(17, 'masud1', '21232f297a57a5a743894a0e4a801fc3', 'master_employee', '00000'),
+(18, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'master_employee', '00000');
 
 -- --------------------------------------------------------
 
@@ -79,6 +81,18 @@ CREATE TABLE `collect_emi` (
   `loan_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `collect_emi`
+--
+
+INSERT INTO `collect_emi` (`id`, `collection_date`, `fine_amount`, `emi_amount`, `total_amount`, `collected_by`, `loan_id`, `customer_id`) VALUES
+(31, '2022-07-02 18:48:48', '331.25', '11041.77', '11373.03', 18, 4, 11),
+(32, '2022-07-02 18:50:14', '331.25', '11041.77', '11373.03', 18, 4, 11),
+(33, '2022-07-02 18:50:47', '331.25', '11041.77', '11373.03', 18, 4, 11),
+(34, '2022-07-05 06:54:07', '220.84', '11041.77', '11262.62', 18, 4, 11),
+(35, '2022-07-05 18:33:15', '0.00', '11041.77', '11041.78', 13, 4, 11),
+(36, '2022-07-05 19:49:44', '47.23', '944.54', '991.78', 13, 5, 12);
 
 -- --------------------------------------------------------
 
@@ -100,6 +114,14 @@ CREATE TABLE `customer` (
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`cid`, `cname`, `father`, `adds`, `phone`, `pin`, `bank_ac_no`, `ifsc`, `voter_image`, `pan_image`, `status`) VALUES
+(11, 'Masud Ahmed', 'XYZ', 'Bilasipara', '9876543210', '783348', '33018019580', 'SBIN0002024', '', '', 1),
+(12, 'XYZ', 'ABC', 'Dhubri', '9101743618', '783348', '31000000024', 'SBI000XXXX', '', '', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -117,6 +139,14 @@ CREATE TABLE `employee` (
   `pro_image` varchar(255) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `employee`
+--
+
+INSERT INTO `employee` (`eid`, `auth_id`, `name`, `adds`, `phone`, `email`, `is_active`, `pro_image`, `status`) VALUES
+(2, 17, 'Masud Ahmed1', 'Dhubri', '9954819723', 'abc@admin.com', 0, 'NA', 1),
+(3, 18, 'Msd', 'XXX', '9876543210', 'abc@abc.com', 0, 'NA', 1);
 
 -- --------------------------------------------------------
 
@@ -168,6 +198,14 @@ CREATE TABLE `loan_ac` (
   `activity` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `loan_ac`
+--
+
+INSERT INTO `loan_ac` (`loan_id`, `loan_ac_no`, `loan_amount`, `interest_rate`, `interest_amount`, `total_amount`, `emi_amount`, `no_of_month`, `no_emi`, `emi_schedule`, `start_date`, `end_date`, `no_emi_left`, `fin_year_cylcle`, `remarks`, `status`, `activity`, `customer_id`) VALUES
+(4, '123456', '500000', '14.00', '560000.00', '1060000.00', '11041.77', 96, 96, '1', '2022-08-01', '2030-08-01', 91, '', 'Document Verified', 1, 1, 11),
+(5, '123456789', '100000', '12.00', '36000.00', '136000.00', '944.54', 36, 144, '4', '2022-08-01', '2025-08-01', 143, '', 'Ok', 1, 1, 12);
 
 --
 -- Indexes for dumped tables
@@ -235,25 +273,25 @@ ALTER TABLE `agent`
 -- AUTO_INCREMENT for table `authenticate_user`
 --
 ALTER TABLE `authenticate_user`
-  MODIFY `au_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `au_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `collect_emi`
 --
 ALTER TABLE `collect_emi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `cid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `cid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `eid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `eid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `fine_master`
@@ -265,7 +303,7 @@ ALTER TABLE `fine_master`
 -- AUTO_INCREMENT for table `loan_ac`
 --
 ALTER TABLE `loan_ac`
-  MODIFY `loan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `loan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -281,9 +319,9 @@ ALTER TABLE `agent`
 -- Constraints for table `collect_emi`
 --
 ALTER TABLE `collect_emi`
-  ADD CONSTRAINT `collect_emi_ibfk_1` FOREIGN KEY (`collected_by`) REFERENCES `agent` (`aid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `collect_emi_ibfk_2` FOREIGN KEY (`loan_id`) REFERENCES `loan_ac` (`loan_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `collect_emi_ibfk_3` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`cid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `collect_emi_ibfk_1` FOREIGN KEY (`collected_by`) REFERENCES `authenticate_user` (`au_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `collect_emi_ibfk_2` FOREIGN KEY (`loan_id`) REFERENCES `loan_ac` (`loan_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `collect_emi_ibfk_3` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`cid`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `employee`
@@ -295,7 +333,7 @@ ALTER TABLE `employee`
 -- Constraints for table `loan_ac`
 --
 ALTER TABLE `loan_ac`
-  ADD CONSTRAINT `loan_ac_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`cid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `loan_ac_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`cid`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

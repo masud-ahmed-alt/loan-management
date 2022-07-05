@@ -1,7 +1,5 @@
 <?php require_once 'menu/header.php' ?>
 
-
-
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 border-right">
@@ -26,6 +24,7 @@
                 <div class="row mt-3">
                     <div class="col-md-12">
                         <label class="labels">Name</label>
+                        <input type="hidden" id="auid" class="form-control" value="">
                         <input type="hidden" id="eid" class="form-control" value="">
                         <input type="hidden" id="roll" class="form-control" value="">
                         <input type="text" id="name" class="form-control" value="">
@@ -70,7 +69,7 @@
                 </div>
                 <br>
 
-                <div class="msg"></div>
+                <div class="" ><p id="msg" class="text-center text-danger"></p></div>
 
             </div>
         </div>
@@ -83,9 +82,7 @@
             url: "backend/profile_model.php",
             type: 'GET',
             success: function(res) {
-                // console.log(res);
                 var data = $.parseJSON(res)
-                // console.log(data);
                 $('#txtroll').html(data.user_roll)
                 $('#txtname').html(data.name)
                 $('#txtphone').html(data.phone)
@@ -97,6 +94,7 @@
                 $('#adds').val(data.adds)
                 $('#roll').val(data.user_roll)
                 $('#eid').val(data.eid)
+                $('#auid').val(data.au_id)
             }
         });
 
@@ -108,6 +106,7 @@
             var eemail = $('#email').val()
             var eadds = $('#adds').val()
             var eid = $('#eid').val()
+            var auid = $('#auid').val()
             if (user == 'master_admin') {
                 alert('Master Admin Does not any changes');
             } else {
@@ -132,20 +131,27 @@
 
         $('#changePass').click(function() {
             var currPass = $('#currPass').val();
-            //  currPass = currPass.trim()
+             currPass = currPass.trim()
             var newPass = $('#newPass').val();
-            //  newPass = newPass.trim()
+             newPass = newPass.trim()
+
+             var au_id = $('#auid').val()
 
             if (currPass == '')
-                $('#msg').html('<p class="text-center text-danger">Please enter current Password</p>')
+                $('#msg').html('Please enter current Password')
             else if (newPass == '')
-                $('#msg').html('<p class="text-center text-danger">Please enter New Password</p>')
+                $('#msg').html('Please enter New Password')
             else {
-                console.log(currPass, newPass)
+                $.ajax({
+                    url: 'backend/change_password_model.php',
+                    data:{currPass, newPass, au_id},
+                    dataType:'text',
+                    type:'POST',
+                    success:function(resp){
+                        $('#msg').html(resp)
+                    }
+                })
             }
-
-
-
         })
 
     });

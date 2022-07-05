@@ -47,10 +47,12 @@
             success: function(data, status) {
                 var value = [];
                 value = $.parseJSON(data);
+                var sl = 0;
                 for (var i = 0; i < value.length; i++) {
+                    sl++
                     var tableOut =
                         `<tr>
-                                    <td >${""}</td>
+                                    <td >${sl}</td>
                                     <td>${value[i][7]}</td>
                                     <td>${value[i][1]}</td>
                                     <td>${value[i][8]}</td>

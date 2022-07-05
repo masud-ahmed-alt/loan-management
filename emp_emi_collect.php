@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <h3><span class="badge badge-success">Collection Entry</span></h3>
 
-    <div class="container-fluid panel-body scroll"  style="overflow:auto; height: calc(100vh - 200px);">
+    <div class="container-fluid panel-body scroll" style="overflow:auto; height: calc(100vh - 200px);">
         <div class="input-group col-5">
             <input type="search" id="accno" class="form-control form-control-sm rounded" placeholder="Search Account" value="123456" aria-label="Search" aria-describedby="search-addon" />
             <button type="button" id="btn_search" class="btn btn-sm btn-outline-primary">Search</button>
@@ -16,6 +16,9 @@
 
     </div>
 </div>
+
+
+
 
 
 <script>
@@ -142,8 +145,16 @@
 
             </div>`;
 
+
+
+
                     if (values == false) {
-                        $('#maindiv').html('<h1 class="text-danger text-center">No Result Found!</h1>');
+                        var noavail = `<div class="container text-center alert alert-danger" role="alert">
+                                        <h4>No record found!</h4>
+                                        <p>Please check loan account number!</p>
+                                        </div>
+`
+                        $('#maindiv').html(noavail);
                     } else {
                         $('#maindiv').html(output);
 
@@ -153,7 +164,7 @@
                             fine: fine
                         }, function(data, status) {
                             var obj = $.parseJSON(data);
-                            
+
                             for (var i = 0; i < obj.length; i++) {
                                 var fineOut = `<option value="${obj[i].fine_percent}">${obj[i].fine_percent+" % - " +obj[i].fine_name}</option>`
                                 $('#finepercent').append(fineOut);
@@ -166,12 +177,9 @@
                         }, function(data, status) {
                             var trans = jQuery.parseJSON(data);
                             for (var i = 0; i < 3; i++) {
-                                var date = new Date(trans[i].collection_date);
-                                var d = ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) +
-                                    '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear();
 
                                 var tableOut = `<tr>
-                                                    <th scope="row">${d}</th>
+                                                    <th scope="row">${formateDate(trans[i].collection_date)}</th>
                                                     <td>${"₹"+financial(trans[i].emi_amount)}</td>
                                                     <td>${"₹"+financial(trans[i].fine_amount)}</td>
                                                     <td>${"₹"+financial(trans[i].total_amount)}</td>
@@ -222,10 +230,22 @@
             }
         });
 
-        function financial(x) {
-            return Number.parseFloat(x).toFixed(2);
-        }
+
     });
+
+    function financial(x) {
+        return Number.parseFloat(x).toFixed(2);
+    }
+
+    function formateDate(date) {
+        newDate = new Date(date);
+
+        var d = ((newDate.getDate() > 9) ? newDate.getDate() : ('0' + newDate.getDate())) + '/' +
+            ((newDate.getMonth() > 8) ? (newDate.getMonth() + 1) : ('0' + (newDate.getMonth() + 1))) +
+            '/' + newDate.getFullYear();
+
+        return d;
+    }
 </script>
 
 

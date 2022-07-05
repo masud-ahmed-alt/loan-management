@@ -79,7 +79,7 @@ if (!isset($_SESSION['user'])) {
                         <a class="collapse-item" href="setloanfine.php">Set Loan Fine</a>
                         <a class="collapse-item" href="loan_ac.php">Create Account</a>
                         <a class="collapse-item" href="emp_emi_collect.php">Collection Entry</a>
-                        <a class="collapse-item" href="#">Loan Report</a>
+                        <a class="collapse-item" href="loan_report.php">Loan Report</a>
                     </div>
                 </div>
             </li>
@@ -181,7 +181,7 @@ if (!isset($_SESSION['user'])) {
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Master Admin</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="user">Master Admin</span>
                                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -202,6 +202,16 @@ if (!isset($_SESSION['user'])) {
 
                 </nav>
                 <!-- End of Topbar -->
+
+
+
+                <script>
+                    $(document).ready(function(){
+                        var user = $_SESSION['user'][0][0];
+                        console.log(user);
+                    })
+                </script>
+
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">

@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once '../config/db.php';
+require_once '../config/functions.php';
 
 
 // code for edit fine master 
@@ -32,19 +33,3 @@ else if ($_POST['delEmp']) {
 
 
 
-// function delete touple 
-function deleteFunc($co, $query)
-{
-    $sqlUp = $co->prepare($query);
-    if ($sqlUp->execute())
-        echo "Deleted Successfull";
-    else
-        echo "Something wents wrong";
-}
-
-// function for set loan activity 
-function editFunc($co, $query)
-{
-    $sqlEd = $co->prepare($query);
-    $sqlEd->execute();
-}

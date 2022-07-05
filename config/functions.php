@@ -26,3 +26,20 @@ function updateData($con,$query)
     }
 }
 
+
+// function delete touple 
+function deleteFunc($co, $query)
+{
+    $sqlUp = $co->prepare($query);
+    if ($sqlUp->execute())
+        echo "Deleted Successfull";
+    else
+        echo "Something wents wrong";
+}
+
+// function for set loan activity 
+function editFunc($co, $query)
+{
+    $sqlEd = $co->prepare($query);
+    $sqlEd->execute();
+}

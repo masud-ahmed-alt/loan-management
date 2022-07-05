@@ -100,14 +100,17 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <input type="text" id="edit_fid_<?= $data['fid'] ?>" value="<?= $data['fid'] ?>">
-                                                            <div class="form-group">
+                                                            <input type="hidden" id="edit_fid_<?= $data['fid'] ?>" value="<?= $data['fid'] ?>">
+                                                            <div class="form-row form-group">
+                                                                <label for="" class="">Fine Name</label>
                                                                 <input class="form-control form-control-sm" id="edit_name_<?= $data['fine_name'] ?>" type="text" value="<?= $data['fine_name'] ?>">
                                                             </div>
-                                                            <div class="form-group">
+                                                            <div class="form-row form-group">
+                                                            <label for="" class="">Percentage</label>
                                                                 <input class="form-control form-control-sm" id="edit_percent_<?= $data['fine_percent'] ?>" type="text" value="<?= $data['fine_percent'] ?>">
                                                             </div>
-                                                            <div class="form-group">
+                                                            <div class="form-row form-group">
+                                                            <label for="" class="">Description</label>
                                                                 <input class="form-control form-control-sm" id="edit_desc_<?= $data['description'] ?>" type="text" value="<?= $data['description'] ?>">
                                                             </div>
                                                         </div>
