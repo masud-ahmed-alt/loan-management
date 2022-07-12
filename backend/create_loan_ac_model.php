@@ -49,7 +49,9 @@ if ($getCus->execute()) {
             /*loan activity notes 
             0-> pending
             1->Active 
-            2-> closed */
+            2-> closed 
+            3-> Rejected
+            */
 
             $insertCus->execute();
             $lastId = $conn->lastInsertId();

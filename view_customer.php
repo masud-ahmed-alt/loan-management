@@ -1,5 +1,10 @@
 <?php require_once 'menu/header.php' ?>
-
+<?php
+if (isset($_POST['btnView'])) {
+    $id = $_POST['cid'];
+    echo "<input type='hidden' id='cid' value='$id'>";
+}
+?>
 <div class="container-fluid  panel-body scroll" style="overflow:auto; height: calc(100vh - 200px);">
     <div class="main-body">
         <div class="row gutters-sm">
@@ -11,6 +16,15 @@
                             <div class="mt-3">
                                 <h4 id="cname"></h4>
                                 <p id="cphone" class="text-muted font-size-sm"></p>
+
+                                <div class="col-row">
+                                    <button id="reject" class="btn btn-sm btn-danger">Reject</button>
+                                    <button id="accept" class="btn btn-sm btn-primary">Accept</button>
+                                    <button id="close" class="btn btn-sm btn-success">Close</button>
+                                </div>
+                                <hr>
+                                <h5 id="para" class="text-center text-danger"></h5>
+                                <hr>
                                 <button class="btn btn-sm btn-outline-primary" onclick="window.location.href='customer.php'">Go Back</button>
                             </div>
                         </div>
@@ -191,12 +205,7 @@
     </div>
 </div>
 
-<?php
-if (isset($_POST['btnView'])) {
-    $id = $_POST['cid'];
-    echo "<input type='hidden' id='cid' value='$id'>";
-}
-?>
+
 
 <script>
     $(document).ready(function() {
@@ -221,6 +230,8 @@ if (isset($_POST['btnView'])) {
                     $('#btnstatus').html('<span class="badge badge-secondary">Pending</span>');
                 else if (act == 1)
                     $('#btnstatus').html('<span class="badge badge-success">Active</span>');
+                else if (act == 3)
+                    $('#btnstatus').html('<span class="badge badge-danger">Rejected</span>');
                 else
                     $('#btnstatus').html('<span class="badge badge-danger">Closed</span>');
 
@@ -252,6 +263,47 @@ if (isset($_POST['btnView'])) {
                 '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear();
             return d;
         }
+
+        $('#reject').click(function() {
+            var id = $("#cid").val();
+            $.ajax({
+                url: 'backend/reject_loan_model.php',
+                type: 'POST',
+                data: {
+                    id
+                },
+                success: function(data, status) {
+                    $("#para").html(data)
+                }
+            })
+        })
+        $('#accept').click(function() {
+            var id = $("#cid").val();
+
+            $.ajax({
+                url: 'backend/accept_loan_model.php',
+                type: 'POST',
+                data: {
+                    id
+                },
+                success: function(data, status) {
+                    $("#para").html(data)
+                }
+            })
+        })
+        $('#close').click(function() {
+            var id = $("#cid").val();
+            $.ajax({
+                url: 'backend/close_loan_model.php',
+                type: 'POST',
+                data: {
+                    id
+                },
+                success: function(data, status) {
+                    $("#para").html(data)
+                }
+            })
+        })
     });
 </script>
 <?php require_once 'menu/footer.php' ?>

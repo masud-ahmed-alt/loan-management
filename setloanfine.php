@@ -47,7 +47,10 @@
                                         <td><?= $data['description'] ?></td>
                                         <td>
                                             <div class="btn-group">
-                                                <input type="submit" class="btn btn-sm btn-success" name="edit_fine" value="Edit" data-toggle="modal" data-target="#editFine_<?= $data['fid'] ?>">
+                                                <form action="edit_fine_master.php" method="post">
+                                                    <input type="hidden" name="fid" value="<?= $data['fid'] ?>">
+                                                    <input type="submit" class="btn btn-sm btn-success" name="edit_fine" value="Edit">
+                                                </form>
                                                 <input type="submit" class="btn btn-sm btn-danger" name="delete_fine" value="Delete" data-toggle="modal" data-target="#deleteFine_<?= $data['fid'] ?>">
                                             </div>
 
@@ -64,7 +67,6 @@
                                                         <div class="modal-footer">
                                                             <input type="hidden" id="del_fid_<?= $data['fid'] ?>" value="<?= $data['fid'] ?>">
                                                             <button type="button" class="btn btn-sm btn-success" data-dismiss="modal">Cancel</button>
-                                                            <!-- <input type="submit" class="btn btn-sm btn-danger" name="delete_fine" value="Delete"> -->
                                                             <button id="del_btn__<?= $data['fid'] ?>" class="btn btn-sm btn-danger">Delete</button>
                                                         </div>
                                                     </div>
@@ -86,56 +88,6 @@
                                                     </script>
                                                 </div>
                                             </div>
-
-
-
-                                            <!-- Modal for edit fine master -->
-                                            <div class="modal fade" id="editFine_<?= $data['fid'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title badge badge-success" id="exampleModalLongTitle">Edit Fine Master</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <input type="hidden" id="edit_fid_<?= $data['fid'] ?>" value="<?= $data['fid'] ?>">
-                                                            <div class="form-row form-group">
-                                                                <label for="" class="">Fine Name</label>
-                                                                <input class="form-control form-control-sm" id="edit_name_<?= $data['fine_name'] ?>" type="text" value="<?= $data['fine_name'] ?>">
-                                                            </div>
-                                                            <div class="form-row form-group">
-                                                            <label for="" class="">Percentage</label>
-                                                                <input class="form-control form-control-sm" id="edit_percent_<?= $data['fine_percent'] ?>" type="text" value="<?= $data['fine_percent'] ?>">
-                                                            </div>
-                                                            <div class="form-row form-group">
-                                                            <label for="" class="">Description</label>
-                                                                <input class="form-control form-control-sm" id="edit_desc_<?= $data['description'] ?>" type="text" value="<?= $data['description'] ?>">
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button type="button" id="edit_btn__<?= $data['fid'] ?>" class="btn btn-sm btn-success">Save changes</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <script>
-                                                    $(document).ready(function() {
-                                                        $('#edit_btn__<?= $data['fid'] ?>').click(function() {
-                                                            var fid = $('#edit_fid_<?= $data['fid'] ?>').val()
-                                                            var name = $('#edit_name_<?= $data['fine_name'] ?>').val();
-                                                            var percent = $('#edit_percent_<?= $data['fine_percent'] ?>').val();
-                                                            var desc = $('#edit_desc_<?= $data['description'] ?>').val();
-                                                            
-
-                                                            console.log(fid, name, percent, desc);
-                                                        });
-                                                    });
-                                                </script>
-                                            </div>
-
                                         </td>
                                     </tr>
                                 </tbody>

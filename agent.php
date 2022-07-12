@@ -50,7 +50,7 @@
                                         <td><?= $data['name'] ?></td>
                                         <td><?= $data['phone'] ?></td>
                                         <td><?= $data['email'] ?></td>
-                                        <td><?= $data['comm_per']."%" ?></td>
+                                        <td><?= $data['comm_per'] . "%" ?></td>
                                         <td><?= $data['adds'] ?></td>
                                         <td><?= $data['voter_id'] ?></td>
                                         <td><?= $data['pan_card'] ?></td>
@@ -62,9 +62,94 @@
                                                 echo "<span id='inactive' class='badge badge-danger'>Inactive</span>";
                                             }
                                             ?></td>
-                                        <td><?= $data['pan_card'] ?></td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <form action="edit_agent.php" method="post">
+                                                    <input type="hidden" name="aid" value="<?=$data['aid']?>">
+                                                    <input type="submit" class="btn btn-sm btn-primary" value="Edit" name="submit">
+                                                </form>
+                                                <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#view_<?= $data['aid'] ?>">Actions</button>
+                                                <button onclick="deleteAgent(<?=$data['aid']?>)" type="button" class="btn btn-sm btn-danger">Delete</button>
+                                            </div>
+                                        </td>
                                     </tr>
+
                                 </tbody>
+                                <!-- View Agent Modal  -->
+                                <div class="modal fade" id="view_<?= $data['aid'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h6 class="modal-title" id="exampleModalLongTitle">Agent Actions</h6>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Close</button>
+                                                <button id="btnActive" type="button" onclick="activeAgent(<?= $data['aid'] ?>)" class="btn btn-sm btn-success">Active</button>
+                                                <button id="btndeactive" type="button" onclick="deactiveAgent(<?= $data['aid'] ?>)" class="btn btn-sm btn-danger">Deactive</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <script>
+                                        function activeAgent(aid) {
+                                            var acvAgt = 'actAgt'
+                                            $.ajax({
+                                                url: 'backend/actions.php',
+                                                data: {
+                                                    aid,
+                                                    acvAgt
+                                                },
+                                                type: 'POST',
+                                                success: function(data, status) {
+                                                    // console.log(data, status);
+                                                    alert('Agent Activated!')
+                                                    window.location.href = 'agent.php';
+                                                }
+                                            });
+                                        }
+
+                                        function deactiveAgent(aid) {
+                                            var dacvAgt = 'dactAgt'
+                                            $.ajax({
+                                                url: 'backend/actions.php',
+                                                data: {
+                                                    aid,
+                                                    dacvAgt
+                                                },
+                                                type: 'POST',
+                                                success: function(data, status) {
+                                                    alert('Agent Deactivated!')
+                                                    window.location.href = 'agent.php';
+                                                }
+                                            });
+                                        }
+
+                                        function deleteAgent(aid){
+                                            var delAgt = 'delAgt'
+                                            $.ajax({
+                                                url: 'backend/actions.php',
+                                                data: {
+                                                    aid,
+                                                    delAgt
+                                                },
+                                                type: 'POST',
+                                                success: function(data, status) {
+                                                    alert('Agent Deleted!')
+                                                    window.location.href = 'agent.php';
+                                                }
+                                            });
+                                        }
+                                    </script>
+                                </div>
+
+                                
+
+                               
+
                         <?php
                             }
                         } else {
@@ -73,13 +158,14 @@
                         ?>
 
                     </table>
-                </div>   
+                </div>
             </div>
-         
+
         </div>
     </div>
 
 </div>
+
 
 
 <!-- Add Agent Modal -->

@@ -181,7 +181,17 @@ if (!isset($_SESSION['user'])) {
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="user">Master Admin</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="user">
+                                    <?php
+                                    $eid = $_SESSION['user'][0][0];
+
+                                    $sqlEmp = "SELECT `name` FROM `employee` WHERE `auth_id`='$eid'";
+                                    $sql = $conn->prepare($sqlEmp);
+                                    $sql->execute();
+                                    $name = $sql->fetch();
+                                    echo $name['name'];
+                                    ?>
+                                </span>
                                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -203,14 +213,6 @@ if (!isset($_SESSION['user'])) {
                 </nav>
                 <!-- End of Topbar -->
 
-
-
-                <script>
-                    $(document).ready(function(){
-                        var user = $_SESSION['user'][0][0];
-                        console.log(user);
-                    })
-                </script>
 
 
                 <!-- Begin Page Content -->

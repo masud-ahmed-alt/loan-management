@@ -6,7 +6,6 @@
 
         <h6><span class="badge badge-success">Personal Details</span></h6>
         <form>
-
             <div class="form-row">
                 <div class="col">
                     <label for="">Customer Name</label>
