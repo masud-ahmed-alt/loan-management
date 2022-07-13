@@ -17,25 +17,38 @@ if ($_POST['del']) {
 // code for delete employee 
 else if ($_POST['delEmp']) {
     $eid = $_POST['id'];
-    $sql = "UPDATE `employee` SET `status`='0' WHERE `eid`='$eid'";
-    deleteFunc($conn, $sql);
+    $au_id = $_POST['au_id'];
+    $sql1 = "UPDATE `employee` SET `status`='0' WHERE `eid`='$eid'";
+    deleteFunc($conn, $sql1);
+    $sql2 = "UPDATE `authenticate_user` SET `status`='0' WHERE `au_id`='$au_id'";
+    deleteFunc($conn, $sql2);
 }
 // code for active agent 
 else if ($_POST['acvAgt']) {
     $aid = $_POST['aid'];
-    $sql = "UPDATE `agent` SET `is_active`='1' WHERE `aid`='$aid'";
-    editFunc($conn, $sql);
+    $au_id = $_POST['au_id'];
+    $sql1 = "UPDATE `agent` SET `is_active`='1' WHERE `aid`='$aid'";
+    editFunc($conn, $sql1);
+    $sql2 = "UPDATE `authenticate_user` SET `status`='1' WHERE `au_id`='$au_id'";
+    editFunc($conn, $sql2);
 }
 // code for deactive agent 
 else if ($_POST['dacvAgt']) {
     $aid = $_POST['aid'];
-    $sql = "UPDATE `agent` SET `is_active`='0' WHERE `aid`='$aid'";
-    editFunc($conn, $sql);
+    $au_id = $_POST['au_id'];
+    $sql1 = "UPDATE `agent` SET `is_active`='0' WHERE `aid`='$aid'";
+    editFunc($conn, $sql1);
+    $sql2 = "UPDATE `authenticate_user` SET `status`='0' WHERE `au_id`='$au_id'";
+    editFunc($conn, $sql2);
 }
+// code for delete agent 
 else if ($_POST['delAgt']) {
     $aid = $_POST['aid'];
-    $sql = "UPDATE `agent` SET `status`='0' WHERE `aid`='$aid'";
-    editFunc($conn, $sql);
+    $au_id = $_POST['au_id'];
+    $sql1 = "UPDATE `agent` SET `status`='0' WHERE `aid`='$aid'";
+    editFunc($conn, $sql1);
+    $sql2 = "UPDATE `authenticate_user` SET `status`='0' WHERE `au_id`='$au_id'";
+    editFunc($conn, $sql2);
 }
 
 // code for update agent 
@@ -47,7 +60,7 @@ else if ($_POST['editAgent']) {
     $comm = $_POST['comm'];
     $adds = $_POST['adds'];
 
-    $sql = "UPDATE `agent` SET `name`='$name',`phone`='$phone',`email`='$email',`comm_per`='$comm',`adds`='$adds' WHERE     `aid` = '$aid'";
+    $sql = "UPDATE `agent` SET `name`='$name',`phone`='$phone',`email`='$email',`comm_per`='$comm',`adds`='$adds' WHERE `aid` = '$aid'";
     editFunc($conn, $sql);
 }
 // code for update fine_master 

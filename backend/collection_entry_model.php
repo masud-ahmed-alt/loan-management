@@ -9,11 +9,9 @@ $emiamt = $_POST['emiamt'];
 $fineamt = $_POST['fineamt'];
 $tamt = $_POST['tamt'];
 $user = $_SESSION['user'][0][0];
-$cus_id = $_POST['cus_id'];
 
-
-$sqlCollect = "INSERT INTO `collect_emi`(`fine_amount`, `emi_amount`, `total_amount`, `collected_by`, `loan_id`, `customer_id`) 
-                                VALUES ('$fineamt','$emiamt','$tamt','$user','$loan_id','$cus_id')";
+$sqlCollect = "INSERT INTO `collect_emi`(`fine_amount`, `emi_amount`, `total_amount`, `collected_by`, `loan_id`) 
+                                VALUES ('$fineamt','$emiamt','$tamt','$user','$loan_id')";
 
 $sql = $conn->prepare($sqlCollect);
 if($sql->execute()){

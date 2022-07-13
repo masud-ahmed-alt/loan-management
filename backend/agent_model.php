@@ -12,7 +12,7 @@ $voter = $_POST['voter'];
 $pass = md5($_POST['password']);
 $userroll = "master_agent";
 
-$sess = $_SESSION['user'];
+$sess = '00000';
 
 $getsql = "SELECT * FROM `authenticate_user` JOIN `agent` WHERE `name`='$name' AND `phone`='$phone' AND `email`='$email' 
                                                 AND `comm_per`='$comm' AND `pan_card`='$pan' AND `voter_id`='$voter' ";

@@ -1,187 +1,395 @@
-<?php require_once 'menu/header.php'?>
+<?php require_once 'menu/header.php' ?>
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
 </div>
 
-<!-- Content Row -->
-<div class="row">
+<div class="container panel-body scroll" style="overflow:auto; height: calc(100vh - 200px);">
+    <!-- Content Row -->
+    <div class="row">
 
-    <!-- Earnings (Monthly) Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-primary shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Total Customers</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">00</div>
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Total Customers</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php
+                                $sql = "SELECT * FROM `customer` WHERE `status`=1";
+                                echo countData($conn, $sql)
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-user fa-2x text-gray-300"></i>
+                        </div>
                     </div>
-                    <div class="col-auto">
-                        <i class="fas fa-user fa-2x text-gray-300"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Total Employees</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php
+                                $sql = "SELECT * FROM `employee` WHERE `status`=1";
+                                echo countData($conn, $sql)
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-id-card fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Active Loan</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php
+                                $sql = "SELECT * FROM `loan_ac` WHERE `activity`=1";
+                                echo countData($conn, $sql)
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Pending Loans</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php
+                                $sql = "SELECT * FROM `loan_ac` WHERE `activity`=0";
+                                echo countData($conn, $sql)
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Earnings (Monthly) Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-success shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                           Total Employees</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">00</div>
+    <div class="row">
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Closed Loans</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php
+                                $sql = "SELECT * FROM `loan_ac` WHERE `activity`=2";
+                                echo countData($conn, $sql)
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa-solid fa-folder-xmark fa-2x text-gray-300"></i>
+                        </div>
                     </div>
-                    <div class="col-auto">
-                        <i class="fas fa-id-card fa-2x text-gray-300"></i>
+                </div>
+            </div>
+            
+        </div>
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-danger text-uppercase mb-1">
+                                Rejected Loans</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php
+                                $sql = "SELECT * FROM `loan_ac` WHERE `activity`=3";
+                                echo countData($conn, $sql)
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-xmark-large fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Total Agents</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php
+                                $sql = "SELECT * FROM `agent` WHERE `status`=1";
+                                echo countData($conn, $sql)
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-xmark-large fa-2x text-gray-300"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-
-       <!-- Pending Requests Card Example -->
-       <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-warning shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            Active Loan</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">00</div>
+    <h5><span class="badge badge-success">Performace</span></h5>
+    <hr>
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Total Amount Disburst</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php
+                                $sql = "SELECT SUM(`loan_amount`) FROM `loan_ac` WHERE `activity`=1 OR `activity`=2";
+                                 echo "₹ ".number_format(allData($conn, $sql),2); 
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa-solid fa-indian-rupee-sign fa-2x text-gray-300"></i>
+                        </div>
                     </div>
-                    <div class="col-auto">
-                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Total Interest Amount</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php
+                                $sql = "SELECT SUM(`interest_amount`) FROM `loan_ac` WHERE `activity`=1 OR `activity`=2";
+                                echo "₹ ".number_format(allData($conn, $sql),2) 
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa-solid fa-indian-rupee-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Total EMI Pending</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php
+                                $sql = "SELECT SUM(`no_emi_left`) FROM `loan_ac` WHERE `activity`=1 OR `activity`=2";
+                                echo allData($conn, $sql)
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Total EMI Collected</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php
+                                $sql = "SELECT SUM(`no_emi`)-SUM(`no_emi_left`) FROM `loan_ac` WHERE `activity`=1 OR `activity`=2";
+                                echo allData($conn, $sql)
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h5><span class="badge badge-success">Amounts</span></h5>
+    <hr>
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                 Total Amount to be collect</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php
+                                $sql = "SELECT SUM(`total_amount`) FROM `loan_ac` WHERE `activity`=1 OR `activity`=2";
+                                 echo "₹ ".number_format(allData($conn, $sql),2); 
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa-solid fa-indian-rupee-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Fine Amount Collect</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php
+                                $sql = "SELECT SUM(`fine_amount`) FROM `collect_emi`";
+                                echo "₹ ".number_format(allData($conn, $sql),2) 
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa-solid fa-indian-rupee-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Total emi Amount Collected</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php
+                                $sql = "SELECT SUM(`emi_amount`) FROM `collect_emi`";
+                                echo "₹ ".number_format(allData($conn, $sql),2)
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa-solid fa-indian-rupee-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Total Amount Collected</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php
+                               $sql = "SELECT SUM(`total_amount`) FROM `collect_emi`";
+                               echo "₹ ".number_format(allData($conn, $sql),2)
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa-solid fa-indian-rupee-sign fa-2x text-gray-300"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Pending Requests Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-warning shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            Pending Loans</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">00</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-comments fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <hr>
+
 </div>
 
-<div class="row">
 
-    <!-- Earnings (Monthly) Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-primary shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Closed Loans</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">00</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-xmark-large fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-</div>
+<?php require_once 'menu/footer.php' ?>
 
-<!-- Content Row -->
+<?php
+function countData($con, $sql)
+{
+    $sql = $con->prepare($sql);
+    $sql->execute();
+    return $sql->rowCount();
+}
 
-<div class="row">
-
-    <!-- Area Chart -->
-    <div class="col-xl-8 col-lg-7">
-        <div class="card shadow mb-4">
-            <!-- Card Header - Dropdown -->
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                        <div class="dropdown-header">Dropdown Header:</div>
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card Body -->
-            <div class="card-body">
-                <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Pie Chart -->
-    <div class="col-xl-4 col-lg-5">
-        <div class="card shadow mb-4">
-            <!-- Card Header - Dropdown -->
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                        <div class="dropdown-header">Dropdown Header:</div>
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card Body -->
-            <div class="card-body">
-                <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
-                </div>
-                <div class="mt-4 text-center small">
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-primary"></i> Direct
-                    </span>
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-success"></i> Social
-                    </span>
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-info"></i> Referral
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-  <!-- Page level plugins -->
-  <script src="assets/js/Chart.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="assets/js/demo/chart-area-demo.js"></script>
-  <script src="assets/js/demo/chart-pie-demo.js"></script>
-<!-- End of Main Content -->
-
-<?php require_once 'menu/footer.php'?>
+function allData($con, $sql)
+{
+    $sql = $con->prepare($sql);
+    $sql->execute();
+    $amt = $sql->fetch();
+    return$amt[0];
+}
+?>

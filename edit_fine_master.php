@@ -46,7 +46,7 @@
         var fname = $("#fname").val();
         var perc = $("#perc").val();
         var desc = $("#desc").val();
-      
+
         var editFine = 'editFine';
         $.ajax({
             url: 'backend/actions.php',

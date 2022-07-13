@@ -1,4 +1,4 @@
-<?php require_once 'menu/header.php' ?>
+<?php require_once 'menu/headeragent.php' ?>
 
 
 <div class="container-fluid">
@@ -208,6 +208,8 @@
                             if (fine == '')
                                 alert('Please Select Fine Percent!')
                             else {
+                                // console.log(emiamt,fine,fineamt,tamt);
+
                                 $.post('backend/collection_entry_model.php', {
                                     accno,
                                     loan_id,
@@ -218,7 +220,7 @@
                                 }, function(data, status) {
                                     console.log(data);
                                     alert(data);
-                                    window.location.href = 'emp_emi_collect.php';
+                                    window.location.href = 'agent_emi_collection.php';
                                 });
                             }
                         });
@@ -227,6 +229,8 @@
                 });
             }
         });
+
+
     });
 
     function financial(x) {
@@ -245,4 +249,4 @@
 </script>
 
 
-<?php require_once 'menu/footer.php' ?>
+<?php require_once 'menu/footeragent.php' ?>

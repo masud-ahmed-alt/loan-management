@@ -43,6 +43,7 @@
                                     <h1 class="h4 text-gray-900 mb-4">Welcome</h1>
                                 </div>
                                 <form class="user">
+
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user" id="username"
                                             placeholder="Username">
@@ -51,7 +52,7 @@
                                         <input type="password" class="form-control form-control-user" id="password"
                                             placeholder="Password">
                                     </div>
-
+                                    <p class="text-primary"><span><b>NB:</b></span> Agent's username is email.</p>
                                     <p class="text-danger text-center" id="msg"></p>
 
                                     <input type="button" id="login" class="btn btn-primary btn-user btn-block"
@@ -75,28 +76,39 @@
     </div>
 
     <script>
-        $(document).ready(function (e) {
+        $(document).ready(function () {
 
             $('#login').click(function () {
                 var username = $('#username').val();
                 var password = $('#password').val();
                 password = password.trim()
 
+
+
                 if (username == '' || password == '') {
                     $("#msg").html("<b>Field can't be empty</b>");
                 } else {
                     $.post("backend/login.php",
                         {
+
                             username: username,
                             password: password
                         },
                         function (data, status) {
-
-                            console.log(data);
-                            if (data == 100) {
-                                window.location.href = ("index.php");
-                            } else {
+                            if (data == 101) {
                                 $("#msg").html("<b>Incorrect Credentials!</b>");
+                            } else {
+                                var value = $.parseJSON(data);
+                                var roll = value[3]
+                                console.log(roll);
+
+                                if (roll == 'master_employee') {
+                                    window.location.href = ("index.php");
+                                    alert('Login as an Employee')
+                                }else if(roll == 'master_agent'){
+                                    window.location.href = ("agentindex.php");
+                                    alert('Login as an Agent')
+                                }
                             }
                         }
                     )

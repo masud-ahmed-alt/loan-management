@@ -19,8 +19,8 @@ if ($sql->rowCount() == 0) {
     $emp->execute();
     if ($emp->rowCount() == 0) {
 
-        $sqlAuthAdd = "INSERT INTO `authenticate_user` (`username`, `password`, `user_roll`, `session_id`) 
-                                                VALUES ('$username','$pass','master_employee','00000')";
+        $sqlAuthAdd = "INSERT INTO `authenticate_user` (`username`, `password`, `user_roll`, `session_id`, `status`) 
+                                                VALUES ('$username','$pass','master_employee','00000', '1')";
 
         $auth = $conn->prepare($sqlAuthAdd);
         if ($auth->execute()) {

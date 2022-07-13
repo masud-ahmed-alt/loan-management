@@ -36,7 +36,8 @@
                             </tr>
                         </thead>
                         <?php
-                        $sqlget = "SELECT * FROM `agent` WHERE `status` = 1";
+                        // $sqlget = "SELECT * FROM `agent` as ag INNER JOIN `authenticate_user` as au  WHERE ag.`auth_id` = au.`au_id` AND ag.`status`=1";
+                        $sqlget = "SELECT * FROM `agent` WHERE `status`=1";
                         $agent = $conn->prepare($sqlget);
                         $agent->execute();
                         if ($agent->rowCount() > 0) {
@@ -46,6 +47,7 @@
                         ?>
                                 <tbody>
                                     <tr>
+                                        
                                         <td><?= $data['aid'] ?></td>
                                         <td><?= $data['name'] ?></td>
                                         <td><?= $data['phone'] ?></td>
@@ -69,7 +71,7 @@
                                                     <input type="submit" class="btn btn-sm btn-primary" value="Edit" name="submit">
                                                 </form>
                                                 <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#view_<?= $data['aid'] ?>">Actions</button>
-                                                <button onclick="deleteAgent(<?=$data['aid']?>)" type="button" class="btn btn-sm btn-danger">Delete</button>
+                                                <button onclick="deleteAgent((<?=$data['aid']?>),(<?=$data['auth_id']?>))" type="button" class="btn btn-sm btn-danger">Delete</button>
                                             </div>
                                         </td>
                                     </tr>
@@ -88,20 +90,21 @@
 
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Close</button>
-                                                <button id="btnActive" type="button" onclick="activeAgent(<?= $data['aid'] ?>)" class="btn btn-sm btn-success">Active</button>
-                                                <button id="btndeactive" type="button" onclick="deactiveAgent(<?= $data['aid'] ?>)" class="btn btn-sm btn-danger">Deactive</button>
+                                                <button id="btnActive" type="button" onclick="activeAgent((<?=$data['aid']?>),(<?=$data['auth_id']?>))" class="btn btn-sm btn-success">Active</button>
+                                                <button id="btndeactive" type="button" onclick="deactiveAgent((<?=$data['aid']?>),(<?=$data['auth_id']?>))" class="btn btn-sm btn-danger">Deactive</button>
                                             </div>
                                         </div>
                                     </div>
 
                                     <script>
-                                        function activeAgent(aid) {
+                                        function activeAgent(aid, au_id) {
                                             var acvAgt = 'actAgt'
                                             $.ajax({
                                                 url: 'backend/actions.php',
                                                 data: {
                                                     aid,
-                                                    acvAgt
+                                                    acvAgt,
+                                                    au_id
                                                 },
                                                 type: 'POST',
                                                 success: function(data, status) {
@@ -112,13 +115,14 @@
                                             });
                                         }
 
-                                        function deactiveAgent(aid) {
+                                        function deactiveAgent(aid, au_id) {
                                             var dacvAgt = 'dactAgt'
                                             $.ajax({
                                                 url: 'backend/actions.php',
                                                 data: {
                                                     aid,
-                                                    dacvAgt
+                                                    dacvAgt,
+                                                    au_id
                                                 },
                                                 type: 'POST',
                                                 success: function(data, status) {
@@ -128,13 +132,15 @@
                                             });
                                         }
 
-                                        function deleteAgent(aid){
+                                        function deleteAgent(aid, au_id){
+                                            // console.log(aid, au_id);
                                             var delAgt = 'delAgt'
                                             $.ajax({
                                                 url: 'backend/actions.php',
                                                 data: {
                                                     aid,
-                                                    delAgt
+                                                    delAgt,
+                                                    au_id
                                                 },
                                                 type: 'POST',
                                                 success: function(data, status) {
@@ -145,11 +151,6 @@
                                         }
                                     </script>
                                 </div>
-
-                                
-
-                               
-
                         <?php
                             }
                         } else {

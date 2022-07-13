@@ -45,8 +45,9 @@
         $.ajax({
             url: 'backend/employee_model.php',
             success: function(data, status) {
-                var value = [];
-                value = $.parseJSON(data);
+                
+                var value = $.parseJSON(data);
+                // console.log(value);
                 var sl = 0;
                 for (var i = 0; i < value.length; i++) {
                     sl++
@@ -59,10 +60,10 @@
                                     <td>${value[i][10]}</td>
                                     <td>${value[i][9]}</td>
                                     <td>${value[i][3]}</td>
-                                    <td><img src="images/profile.jpg" alt="Error" style="width: 60px;"></td>
+                                    <td><img src="images" alt="Error" style="width: 60px;"></td>
                                     <td>
                                     <div class="btn-group">
-                                        <button id="" onclick="deleteEmp(${(value[i].eid)})"  class="btn btn-sm btn-danger">Delete</button>
+                                        <button id="" onclick="deleteEmp(${(value[i].eid)},${(value[i].au_id)})"  class="btn btn-sm btn-danger">Delete</button>
                                     </div>
                                     </td>
                                 </tr>`;
@@ -73,22 +74,20 @@
 
     });
 
-    function deleteEmp(id) {
+    function deleteEmp(id, au_id) {
         var delEmp = 'delEmp';
+        // console.log(id, au_id);
         $.post('backend/actions.php', {
             delEmp,
+            au_id,
             id
         }, function(data, status) {
-            alert('Deleted!');
-            window.location.href='employee.php'
+            console.log(data, status);
+            // alert('Deleted!');
+            // window.location.href='employee.php'
         })
     }
 
-
-    // if (value[0].user_roll == 'master_admin')
-    //     console.log('Master Admin');
-    // else
-    //     alert('Only Access for master admin')
 </script>
 
 
