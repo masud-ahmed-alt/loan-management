@@ -6,7 +6,7 @@
 
     <div class="container-fluid panel-body scroll" style="overflow:auto; height: calc(100vh - 200px);">
         <div class="input-group col-5">
-            <input type="search" id="accno" class="form-control form-control-sm rounded" placeholder="Search Account" value="123456" aria-label="Search" aria-describedby="search-addon" />
+            <input type="search" id="accno" class="form-control form-control-sm rounded" placeholder="Search Account" value="" aria-label="Search" aria-describedby="search-addon" />
             <button type="button" id="btn_search" class="btn btn-sm btn-outline-primary">Search</button>
         </div>
         <hr>
